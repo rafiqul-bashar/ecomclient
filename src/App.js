@@ -2,12 +2,12 @@
 import './App.css';
 
 import { Route, Routes } from 'react-router-dom';
-import { Auth, Cart, Footer, Header, Home, Loading, Notfound, Products, Profile, ProtectedRoute, SingleProduct } from './Components';
+import { Auth, Cart, Footer, Header, Home, Notfound, Products, Profile, ProtectedRoute, SingleProduct } from './Components';
 import { AdminHeader, AdminProducts, Dashboard, EditProduct } from './Components/Admin';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify';
 const admin = !true
-const user = true
+const user = false
 
 function App() {
 
@@ -32,16 +32,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route element={<ProtectedRoute user={user} />} >
           <Route path="/mycart" element={<Cart />} />
           <Route path="/myaccount" element={<Profile />} />
-
         </Route>
         <Route path="/auth" element={<Auth />} />
-
         <Route path="*" element={<Notfound />} />
       </Routes>
       <Footer />

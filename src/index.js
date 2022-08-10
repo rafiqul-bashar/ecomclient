@@ -6,8 +6,12 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import { getTotals } from './redux/cartSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+store.dispatch(getTotals())
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>

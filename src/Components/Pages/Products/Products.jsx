@@ -1,43 +1,58 @@
 import React from 'react'
-import { products } from '../../../staticdata'
-import { RiShoppingCart2Line } from "react-icons/ri"
-import { useNavigate } from 'react-router'
+// import { products } from '../../../staticdata'
+// import { RiShoppingCart2Line } from "react-icons/ri"
+import { useLocation } from 'react-router'
 import Loading from '../../Common/Loading'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchProducts, loadedProducts, selectStatus } from '../../../redux/productSlice'
+import ProductsContainer from './ProductsContainer'
+
+
+const categories = ["all",
+  "electronics",
+  "women's clothing",
+  "jewelery",
+  "men's clothing"
+]
 export default function Products() {
-  const navigate = useNavigate()
-  const loading = false
-  if (loading ) {
+
+  const dispatch = useDispatch()
+  const status = useSelector(selectStatus)
+  const products = useSelector(loadedProducts)
+  const {state}=useLocation()
+  const [filtered, setFiltered] = React.useState("all")
+  const result = products.filter(product => product.category === filtered)
+  
+  React.useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchProducts())
+    }
+  }, [])
+  React.useEffect(() => {
+    if (state?.category ) {
+      setFiltered(state.category)
+    }
+  }, [])
+
+  if (status === "loading") {
     return <Loading />
-  } else
-    return (
-      <section className='container grid grid-cols-1 md:grid-cols-4 py-12'>
-        <div>Filter Sections </div>
-        <div className='col-span-3 grid gap-3 grid-cols-3'>
-          {
-            products.map((product, index) => (
-              <div key={index} className='product_page_single_product'>
-                <div className='h-[200px] group-hover:opacity-90'>
-                  <img src={product?.image} alt={product.title} className="top_products_image " />
-                </div>
-                <div className='space-y-3 p-2'>
-                  <div className='h-[60px]'>
-                    <h1 className='font-semibold text-xl'>{product?.title.substring(0, 60)}</h1>
-                  </div>
-                  <br />
-                  <h3 className='text-4xl text-black/80 font-bold'>$ {product?.price}</h3>
-                  <div className='flex items-center space-x-2'>
-                    <h3 className='text-lg font-semibold'>Rating {product?.rating?.rate}</h3>
-                    <h3 className='text-lg font-semibold'>People: {product?.rating?.count}</h3>
-                  </div>
-                  <div className='flex items-center justify-between '>
-                    <button onClick={() => navigate(`/product/${product.id}`)} className='cursor-pointer font-bold text-red/80 hover:underline'>More Details</button>
-                    <RiShoppingCart2Line className='text-3xl' />
-                  </div>
-                </div>
-              </div>
-            ))
-          }
+  }
+
+  return (
+    <section className='container grid grid-cols-1 md:grid-cols-4 py-12'>
+      <div>
+        <div className='sticky top-[20%]'>
+          <h1 className='ml-20 mb-5 text-lg font-semibold text-red-500'>Filter Sections </h1>
+          <div className='grid grid-cols-2 gap-5'>
+            {categories.map((cat, index) => (
+              <div onClick={() => setFiltered(cat)} key={index} className="capitalize border-2 border-black flex items-center justify-center cursor-pointer hover:scale-95 transition-all py-1 px-[1px] ">{cat}</div>
+            ))}
+          </div>
         </div>
-      </section>
-    )
+      </div>
+      <div className='col-span-3'>
+        <ProductsContainer products={filtered === "all" ? products : result} />
+      </div>
+    </section>
+  )
 }

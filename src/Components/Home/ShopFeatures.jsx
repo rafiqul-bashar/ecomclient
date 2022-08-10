@@ -8,7 +8,7 @@ const features = [{ img: delivery, title: "Free Shipping", text: "Over $100 wort
 
 export default function ShopFeatures() {
     return (
-        <div className="bg-black select-none">
+        <div className=" select-none">
             <div className="container py-4 gap-4 grid grid-cols-2 md:grid-cols-4">
                 {
                     features.map((feature, index) => (

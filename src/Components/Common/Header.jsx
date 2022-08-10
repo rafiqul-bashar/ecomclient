@@ -33,7 +33,7 @@ export default function Header() {
           </div>
         </div>
         <div className="menu flex items-center space-x-3">
-          <Icon as={FaSearch} className="text-2xl" />
+          {/* <Icon as={FaSearch} className="text-2xl" /> */}
 
           <Link to="/mycart">
             <div className='relative'>
@@ -41,7 +41,7 @@ export default function Header() {
               <span className='header_cart_quantity'>{cartTotalQuantity}</span>
             </div>
           </Link>
-          <Icon as={AiOutlineHeart} className="text-3xl" />
+          {/* <Icon as={AiOutlineHeart} className="text-3xl" /> */}
           <div className="sm:hidden"><Hamburger toggled={isOpen} toggle={setOpen} /></div>
         </div>
       </div>

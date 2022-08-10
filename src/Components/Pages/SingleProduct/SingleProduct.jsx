@@ -1,9 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { products } from '../../../staticdata'
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { addToCart } from '../../../redux/cartSlice'
+import { loadedProducts } from '../../../redux/productSlice'
 
 export default function SingleProduct() {
   const [product, setProduct] = React.useState({})
@@ -11,6 +11,7 @@ export default function SingleProduct() {
   const { id } = useParams()
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  const products =useSelector(loadedProducts)
   React.useEffect(() => {
     const matchingProduct = products.find(el => el.id == id)
     setProduct(matchingProduct)
@@ -28,7 +29,7 @@ export default function SingleProduct() {
   }
 
   const handleAddtoCart =()=>{
-    dispatch(addToCart(product)) 
+    dispatch(addToCart({...product,cartQuantity:quantity})) 
     navigate('/cart')
   }
 

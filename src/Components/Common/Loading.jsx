@@ -1,17 +1,11 @@
 import React from 'react'
-
+import preloader from "../../assets/loader.gif"
 export default function Loading() {
     return (
-        <article className='w-full h-full flex items-center justify-center space-y-3 py-32'>
-            <div className='flex flex-col items-center space-y-3'>
-                <div class="animate-bounce flex space-x-4">
-                    <div class=" bg-black/70 h-4 w-4" />
-                    <div class=" bg-black/70 h-4 w-4" />
-                    <div class=" bg-black/70 h-4 w-4" />
-                    <div class=" bg-black/70 h-4 w-4" />
-                </div>
-                <div className='text-3xl tracking-widest animate-pulse '>Loading ....</div>
-            </div>
+        <article id='preloader ' className='bg-[#000] h-full w-full fixed z-index-[100]' style={{ 
+            backgroundImage: `url(${preloader})` ,backgroundRepeat: 'no-repeat',backgroundSize:"20%",backgroundPosition:"center"
+          }}>
+           
         </article>
     )
 }

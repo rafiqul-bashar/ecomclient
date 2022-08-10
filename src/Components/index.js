@@ -4,6 +4,8 @@ export { default as Notfound } from './Common/Notfound';
 export { default as Home } from './Pages/Home/Home';
 export { default as Cart } from './Pages/Cart/Cart';
 export { default as Products } from './Pages/Products/Products';
+export { default as ProductsContainer } from './Pages/Products/ProductsContainer';
+export { default as CategoryProducts } from './Pages/Products/CategoryProducts';
 export { default as Profile } from './Pages/Profile/Profile';
 export { default as SingleProduct } from './Pages/SingleProduct/SingleProduct';
 export { default as Login } from './Pages/Auth/Login';
