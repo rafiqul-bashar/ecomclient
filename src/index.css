@@ -4,7 +4,7 @@
 
 @layer components {
   .navLink {
-    @apply border-b-2 pb-1 font-semibold border-b-white hover:opacity-80 hover:border-b-red-400 transition-all duration-200;
+    @apply border-b-4 pb-2 font-semibold border-b-white hover:opacity-80 hover:border-primary transition-all duration-200;
   }
 
   .footerLink {

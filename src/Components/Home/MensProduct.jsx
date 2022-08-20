@@ -1,16 +1,20 @@
 import React from "react";
+import { RiShoppingCart2Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadedProducts } from "../../redux/productSlice";
-import { RiShoppingCart2Line } from "react-icons/ri";
-export default function TopProducts() {
+export default function MensProduct() {
   const navigate = useNavigate();
   const products = useSelector(loadedProducts);
+  const result = products.filter(
+    (product) => product.category === "men's clothing"
+  );
+
   return (
     <div className="container">
-      <h1 className="top_products_title">Top Products</h1> <br />
+      <h1 className="top_products_title">Men's Collection</h1> <br />
       <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-        {products?.slice(0, 8).map((product, index) => (
+        {result?.map((product, index) => (
           <div
             onClick={() => navigate(`/product/${product.id}`)}
             key={index}
